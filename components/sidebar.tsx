@@ -10,21 +10,25 @@ const sectionGroups: SectionGroup[] = [
     [
         {
             name: "Home",
-            icon: "BsHouse"
+            icon: "BsHouse",
+            route: "/home"
         },
         {
             name: "Favourites",
-            icon: "BsStar"
+            icon: "BsStar",
+            route: "/favourites"
         }
     ],
     [
         {
             name: "Workbooks",
-            icon: "BsBook"
+            icon: "BsBook",
+            route: "/workbooks"
         },
         {
             name: "Settings",
-            icon: "BsGear"
+            icon: "BsGear",
+            route: "/settings"
         }
     ]
 ]
@@ -46,7 +50,7 @@ export const Sidebar = () => {
                     return (
                         <div key={index}>
                             {sectionGroup.map((section, index) => (
-                                <Section key={index} onClick={() => handleSectionChange(section)} name={section.name} icon={section.icon} isActive={activeSection.name === section.name} />
+                                <Section key={index} onClick={() => handleSectionChange(section)} name={section.name} icon={section.icon} route={section.route} isActive={activeSection.name === section.name} />
                             ))}
                             {index !== sectionGroups.length - 1 && <Separator className="my-5" />}
                         </div>
