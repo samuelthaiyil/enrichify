@@ -4,16 +4,15 @@ import { useState } from "react";
 import { Section } from "./section";
 import { Section as SectionType } from "../app/types/section";
 import { SearchBar } from "./searchbar";
-import { Logo } from "./logo";
 
 const sections: SectionType[] = [
     {
         name: "Home",
-        icon: "HomeIcon"
+        icon: "BsHouse"
     },
     {
         name: "Workbooks",
-        icon: "BookOpenIcon"
+        icon: "BsBook"
     }
 ]
 
@@ -22,7 +21,7 @@ export const Sidebar = () => {
 
     return (
         <div className="w-1/5 h-screen">
-            <img src="/logo.svg" alt="logo" className="w-3/4 p-3 pt-5" />
+            <img src="/logo.svg" alt="logo" className="w-60 p-3 pt-5" />
             <SearchBar query={""} />
             {
                 sections.map((section, index) => (

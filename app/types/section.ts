@@ -1,6 +1,6 @@
-import { IconNames } from "@/components/ui/heroicon";
+import { BootstrapIconNames } from "@/components/ui/bootstrap-icon";
 
 export type Section = {
     name: string;
-    icon: IconNames;
+    icon: BootstrapIconNames;
 }
