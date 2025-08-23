@@ -4,3 +4,5 @@ export type Section = {
     name: string;
     icon: BootstrapIconNames;
 }
+
+export type SectionGroup = Section[];

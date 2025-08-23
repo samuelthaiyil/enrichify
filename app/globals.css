@@ -2,5 +2,6 @@
 
 body {
   @apply text-slate-800;
+  font-size: 14px;
 }
 

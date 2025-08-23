@@ -5,11 +5,14 @@ import { BootstrapIcon } from "./ui/bootstrap-icon";
 
 type SectionProps = SectionType & {
     isActive: boolean;
+    onClick: () => void;
 };
 
-export const Section = ({ name, icon, isActive }: SectionProps) => (
-    <div className={`hover:bg-grey-200 flex items-center gap-3 pl-4 pr-2 py-2 rounded-lg bg-card ${isActive ? "bg-primary" : ""}`}>
-        <BootstrapIcon name={icon} />
-        <span className="text-md">{name}</span>
+export const Section = ({ name, icon, isActive, onClick }: SectionProps) => (
+    <div onClick={onClick} className={`${isActive ? "border-l-3 border-l-black pl-3 relative" : "pl-3"}`}>
+        <div className={`hover:bg-gray-200 flex items-center gap-3 pl-4 pr-4 py-3 rounded-lg bg-card`}>
+            <BootstrapIcon name={icon} />
+            <span className="text-md">{name}</span>
+        </div>
     </div>
 )
