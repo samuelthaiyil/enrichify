@@ -8,10 +8,10 @@ type ActivityFeedProps = {
 
 export const ActivityFeed = ({ activities }: ActivityFeedProps) => {
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
             {activities.map((activity, index) => {
                 return (
-                    <div key={activity.user._id} className="flex flex-col m-0">
+                    <div key={activity._id} className="flex flex-col m-0">
                         <div className="flex flex-row items-start gap-4 m-0">
                             <div className="flex flex-col items-center">
                                 <Avatar className="w-12 h-12 rounded-full overflow-hidden">
@@ -22,7 +22,9 @@ export const ActivityFeed = ({ activities }: ActivityFeedProps) => {
                                 </div>}
                             </div>
                             <div className="flex flex-col mt-2">
-                                <span>{activity.user.name} {activity.description}</span>
+                                <div className="flex flex-row gap-1">
+                                    <span className="tracking-tighter font-semibold">{activity.user.name}</span> <span className="text-gray-600 tracking-tighter">{activity.description}</span>
+                                </div>
                                 <span className="text-gray-500 text-sm">{new Date(activity._creationTime).toLocaleString()}</span>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ export const SearchBar = ({ query }: SearchBarProps) => {
 
     return (
         <>
-            <div className="rounded-full bg-red-800 p-2 px-8 my-4 mb-4 w-full" onClick={() => setIsSearchDialogOpen(true)}>
+            <div className="rounded-full border-gray-800 p-2 px-8 my-4 mb-4 mx-auto w-50" onClick={() => setIsSearchDialogOpen(true)}>
                 <span className="text-sm">Search anything</span>
             </div>
             <SearchDialog open={isSearchDialogOpen} setOpen={setIsSearchDialogOpen} />
