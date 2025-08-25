@@ -13,6 +13,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as activity from "../activity.js";
 import type * as workbook from "../workbook.js";
 
 /**
@@ -24,6 +25,7 @@ import type * as workbook from "../workbook.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  activity: typeof activity;
   workbook: typeof workbook;
 }>;
 export declare const api: FilterApi<
