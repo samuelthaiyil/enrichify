@@ -6,14 +6,17 @@ import { v } from "convex/values";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { BootstrapIcon } from "./ui/bootstrap-icon";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { User } from "@/app/types/user";
 
 export const WorkbookTable = () => {
 
   const workbooks = useQuery(api.workbook.getWorkbooks);
+  const users = useQuery(api.user.getUsers) as User[];
 
   return <div className="px-6">
     <Table>
-      <TableCaption>A list of your workbooks.</TableCaption>
+      {!workbooks?.length && <TableCaption>A list of your workbooks.</TableCaption>}
       <TableHeader>
         <TableRow>
           <TableHead className="w-90">Name</TableHead>
@@ -23,14 +26,27 @@ export const WorkbookTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {workbooks?.map((workbook) => (
-          <TableRow key={workbook._id}>
-            <TableCell>{workbook.name}</TableCell>
-            <TableCell>{new Date(workbook._creationTime).toLocaleDateString()}</TableCell>
-            <TableCell>{workbook.createdBy}</TableCell>
-            <TableCell><BootstrapIcon name="BsStar" /></TableCell>
-          </TableRow>
-        ))}
+        {workbooks?.map((workbook) => {
+          const user = users.find((user) => user._id === workbook.createdBy);
+          return (
+            <TableRow key={workbook._id}>
+              <TableCell>{workbook.name}</TableCell>
+              <TableCell>{new Date(workbook._creationTime).toLocaleDateString()}</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <Avatar className="w-6 h-6 rounded-full overflow-hidden">
+                    <AvatarImage src={user?.imageUrl} className="w-full h-full object-cover" />
+                    <AvatarFallback className="bg-red-200 text-red-800 text-xs w-6 h-6 rounded-full flex items-center justify-center">
+                      {user?.name?.charAt(0) || "?"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span>{user?.name || "Unknown User"}</span>
+                </div>
+              </TableCell>
+              <TableCell><BootstrapIcon name="BsStar" /></TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   </div>

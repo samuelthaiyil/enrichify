@@ -18,7 +18,7 @@ export const getActivities = query({
         _id: activity._id,
         description: activity.description,
         workbookId: activity.workbookId,
-        user: activity.user,
+        userId: activity.user,
         _creationTime: activity._creationTime,
       }))
 
