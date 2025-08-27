@@ -18,3 +18,11 @@ export const getWorkbooks = query({
         return tasks;
     },
 });
+
+export const getWorkbookById = query({
+    args: { id: v.id("Workbooks") },
+    handler: async (ctx, args) => {
+        const workbook = await ctx.db.get(args.id);
+        return workbook;
+    },
+});
