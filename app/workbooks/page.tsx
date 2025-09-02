@@ -2,13 +2,13 @@
 
 import { WorkbookHeader } from "@/components/workbookheader";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { WorkbookTable } from "@/components/workbooktable";
+import { WorkbooksTable } from "@/components/workbookstable";
 
 export default async function WorkbooksPage() {
   return (
     <div>
         <WorkbookHeader />
-        <WorkbookTable />
+        <WorkbooksTable />
     </div>
   );
 }
