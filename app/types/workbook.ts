@@ -6,3 +6,8 @@ type Workbook = {
     createdBy: User;
     _creationTime: string;
 }
+
+export type WorkbookTableRow = {
+    name: string;
+    email: string;
+};

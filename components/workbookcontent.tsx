@@ -4,6 +4,10 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { WorkbookBreadcrumb } from "./workbookbreadcrumb";
 import { WorkbookTable } from "./workbooktable";
+import { Button } from "./ui/button";
+import { BootstrapIcon } from "./ui/bootstrap-icon";
+import { useState } from "react";
+import { WorkbookTableRow } from "@/app/types/workbook";
 
 interface WorkbookContentProps {
   id: string;
@@ -11,15 +15,38 @@ interface WorkbookContentProps {
 
 export const WorkbookContent = ({ id }: WorkbookContentProps) => {
   const workbook = useQuery(api.workbook.getWorkbookById, { id: id as any });
-  
+  const [selectedRows, setSelectedRows] = useState<WorkbookTableRow[]>([
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+    { name: "", email: "" },
+  ]);
+
   if (!workbook) {
     return <div>Loading...</div>;
   }
-  
+
+  const handleRunEnrichment = () => {};
+
   return (
     <div>
-      <WorkbookBreadcrumb name={workbook.name} />
-      <WorkbookTable />
+      <div className="flex justify-between">
+        <WorkbookBreadcrumb name={workbook.name} />
+        <Button onClick={handleRunEnrichment} disabled={!selectedRows.length}>
+          <BootstrapIcon name="BsPlay" />
+          Run Enrichment
+        </Button>
+      </div>
+      <WorkbookTable
+        selectedRows={selectedRows}
+        setSelectedRows={setSelectedRows}
+      />
     </div>
   );
 };
