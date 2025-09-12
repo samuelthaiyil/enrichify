@@ -1,3 +1,4 @@
+import { findEmailsFromName } from "@/app/api/exa";
 import { BootstrapIcon } from "./ui/bootstrap-icon";
 import {
   Table,
@@ -9,12 +10,16 @@ import {
 } from "./ui/table";
 import { WorkbookTableRow } from "@/app/types/workbook";
 
-type WorkboookTableProps = {
+type WorkbookTableProps = {
   selectedRows: WorkbookTableRow[];
   setSelectedRows: (updater: (oldRows: WorkbookTableRow[]) => WorkbookTableRow[]) => void;
 };
 
-export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkboookTableProps) => {
+export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTableProps) => {
+  const runEnrichment = async (companyName: string, index: number) => {
+    const result = await findEmailsFromName(companyName);
+    
+  }
   
   const updateRowCompanyName = (name: string, index: number) => {
     setSelectedRows((oldRows: WorkbookTableRow[]) => {
@@ -60,12 +65,12 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkboookTableP
                   onChange={(e) => updateRowCompanyName(e.target.value, index)}
                   value={row.name}
                 />
-                <BootstrapIcon className="ml-auto cursor-pointer" name="BsPlay" />
+                <BootstrapIcon className="ml-auto cursor-pointer" onClick={() => runEnrichment(row.name, index)} name="BsPlay" />
               </TableCell>
               <TableCell className="border border-1 border-gray-200">
                 <input 
                   className="text-sm w-full focus:outline-none focus:ring-0" 
-                  value={row.email}
+                  value={row.emails}
                 />
               </TableCell>
             </TableRow>

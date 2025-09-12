@@ -1,9 +1,9 @@
 import Exa from "exa-js";
 
-const exa = new Exa();
+const exa = new Exa(process.env.EXA_API_KEY);
 
-export const findEmailFromName = async (name: string): Promise<unknown> =>  {
-  return await exa.searchAndContents(`Find the work email of ${name}`, {
+export const findEmailsFromName = async (companyName: string): Promise<unknown> =>  {
+  return await exa.searchAndContents(`Find emails for employees of ${companyName}`, {
     type: "auto",
     text: true,
   });
