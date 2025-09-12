@@ -9,5 +9,5 @@ type Workbook = {
 
 export type WorkbookTableRow = {
     name: string;
-    email: string;
+    emails: string[];
 };

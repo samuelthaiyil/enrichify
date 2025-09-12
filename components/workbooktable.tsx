@@ -11,10 +11,26 @@ import { WorkbookTableRow } from "@/app/types/workbook";
 
 type WorkboookTableProps = {
   selectedRows: WorkbookTableRow[];
-  setSelectedRows: (WorkbookTableRow: []) => void;
+  setSelectedRows: (updater: (oldRows: WorkbookTableRow[]) => WorkbookTableRow[]) => void;
 };
 
 export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkboookTableProps) => {
+  
+  const updateRowCompanyName = (name: string, index: number) => {
+    setSelectedRows((oldRows: WorkbookTableRow[]) => {
+      return oldRows.map((row: WorkbookTableRow, i: number) => {
+        if (i === index) {
+          return {
+            ...row,
+            name
+          }
+        }
+
+        return row;
+      });
+    });
+  }
+
   return (
     <>
       <button />
@@ -24,7 +40,7 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkboookTableP
             <TableHead>
               <div className="flex items-center gap-2">
                 <BootstrapIcon name="BsFonts" />
-                <span>Name</span>
+                <span>Company Name</span>
               </div>
             </TableHead>
             <TableHead>
@@ -41,9 +57,10 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkboookTableP
               <TableCell className="flex flex-row border border-1 border-gray-200">
                 <input 
                   className="text-sm w-full focus:outline-none focus:ring-0" 
+                  onChange={(e) => updateRowCompanyName(e.target.value, index)}
                   value={row.name}
                 />
-                <BootstrapIcon className="ml-auto" name="BsPlay" />
+                <BootstrapIcon className="ml-auto cursor-pointer" name="BsPlay" />
               </TableCell>
               <TableCell className="border border-1 border-gray-200">
                 <input 

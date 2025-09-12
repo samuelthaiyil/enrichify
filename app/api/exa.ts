@@ -1,4 +1,4 @@
-import Exa, { SearchResponse } from "exa-js";
+import Exa from "exa-js";
 
 const exa = new Exa();
 
