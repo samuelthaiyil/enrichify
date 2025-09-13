@@ -18,7 +18,8 @@ type WorkbookTableProps = {
 export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTableProps) => {
   const runEnrichment = async (companyName: string, index: number) => {
     const result = await findEmailsFromName(companyName);
-    
+    console.log(result);
+
   }
   
   const updateRowCompanyName = (name: string, index: number) => {
@@ -27,7 +28,7 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTablePr
         if (i === index) {
           return {
             ...row,
-            name
+            companyName: name
           }
         }
 
@@ -63,14 +64,14 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTablePr
                 <input 
                   className="text-sm w-full focus:outline-none focus:ring-0" 
                   onChange={(e) => updateRowCompanyName(e.target.value, index)}
-                  value={row.name}
+                  value={row.companyName}
                 />
-                <BootstrapIcon className="ml-auto cursor-pointer" onClick={() => runEnrichment(row.name, index)} name="BsPlay" />
+                <BootstrapIcon className="ml-auto cursor-pointer" onClick={() => runEnrichment(row.companyName, index)} name="BsPlay" />
               </TableCell>
               <TableCell className="border border-1 border-gray-200">
                 <input 
                   className="text-sm w-full focus:outline-none focus:ring-0" 
-                  value={row.emails}
+                  value={row.contactInfo}
                 />
               </TableCell>
             </TableRow>

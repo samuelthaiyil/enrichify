@@ -16,16 +16,16 @@ interface WorkbookContentProps {
 export const WorkbookContent = ({ id }: WorkbookContentProps) => {
   const workbook = useQuery(api.workbook.getWorkbookById, { id: id as any });
   const [selectedRows, setSelectedRows] = useState<WorkbookTableRow[]>([
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
-    { name: "", emails: "" },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
+    { companyName: "", contactInfo: [] },
   ]);
 
   if (!workbook) {
