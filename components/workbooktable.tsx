@@ -9,6 +9,7 @@ import {
   TableCell,
 } from "./ui/table";
 import { WorkbookTableRow } from "@/app/types/workbook";
+import { createPipe } from "@/app/api/pipe0";
 
 type WorkbookTableProps = {
   selectedRows: WorkbookTableRow[];
@@ -17,9 +18,8 @@ type WorkbookTableProps = {
 
 export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTableProps) => {
   const runEnrichment = async (companyName: string, index: number) => {
-    const result = await findEmailsFromName(companyName);
+    const result = await createPipe(companyName);
     console.log(result);
-
   }
   
   const updateRowCompanyName = (name: string, index: number) => {
@@ -31,7 +31,6 @@ export const WorkbookTable = ({ selectedRows, setSelectedRows }: WorkbookTablePr
             companyName: name
           }
         }
-
         return row;
       });
     });
