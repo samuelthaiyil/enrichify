@@ -8,6 +8,7 @@ type Workbook = {
 }
 
 export type WorkbookTableRow = {
-    companyName: string;
-    contactInfo: string[];
+    contactName: string;
+    companyUrl: string;
+    workEmail: string;
 };

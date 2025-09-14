@@ -4,6 +4,7 @@ import { Sidebar } from 'components/sidebar'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
             <Sidebar /> 
             <main className="flex-1 p-6">{children}</main>
           </div>
+          <Toaster />
         </ConvexProvider>
       </body>
     </html>
