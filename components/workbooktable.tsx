@@ -10,6 +10,7 @@ import {
 import { WorkbookTableRow } from "@/app/types/workbook";
 import { createPipe } from "@/app/api/pipe0";
 import { toast } from "sonner";
+import { useState } from "react";
 
 type WorkbookTableProps = {
   selectedRows: WorkbookTableRow[];
@@ -22,19 +23,27 @@ export const WorkbookTable = ({
   selectedRows,
   setSelectedRows,
 }: WorkbookTableProps) => {
+  const [loadingRow, setLoadingRow] = useState<number | null>(null);
+
   const runEnrichment = async (
     contactName: string,
     companyUrl: string,
     index: number
   ) => {
+    toast.loading(`Running Enrichment on Row ${index + 1}`, {
+      duration: 500,
+    });
+    setLoadingRow(index);
+
     try {
       const result = await createPipe(contactName, companyUrl);
-      console.log("result: ", result);
       updateRowProperty("workEmail", result ?? "", index);
     } catch (error) {
       console.log(error);
       toast.error("Error running enrichment");
     }
+
+    setLoadingRow(null);
   };
 
   const updateRowProperty = (key: string, value: string, index: number) => {
@@ -105,16 +114,34 @@ export const WorkbookTable = ({
                   name="BsPlay"
                 />
               </TableCell>
-              <TableCell className="border border-1 border-gray-200">
-                <input
-                  className="text-sm w-full focus:outline-none focus:ring-0"
-                  value={row.workEmail}
-                />
+              <TableCell className="border border-1 border-gray-200 p-0">
+                {loadingRow === index ? (
+                  <SkeletonLoader />
+                ) : (
+                  <input
+                    className="text-sm w-full h-full p-2 focus:outline-none focus:ring-0"
+                    value={row.workEmail}
+                  />
+                )}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </>
+  );
+};
+
+const SkeletonLoader = () => {
+  return (
+    <div
+      className="w-full h-8 p-2"
+      style={{
+        background:
+          "linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%)",
+        backgroundSize: "200% 100%",
+        animation: "shimmer 1.3s infinite linear",
+      }}
+    />
   );
 };
