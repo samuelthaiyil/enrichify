@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as activity from "../activity.js";
+import type * as favourite from "../favourite.js";
 import type * as user from "../user.js";
 import type * as workbook from "../workbook.js";
 
@@ -27,6 +28,7 @@ import type * as workbook from "../workbook.js";
  */
 declare const fullApi: ApiFromModules<{
   activity: typeof activity;
+  favourite: typeof favourite;
   user: typeof user;
   workbook: typeof workbook;
 }>;
