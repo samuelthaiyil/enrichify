@@ -44,7 +44,7 @@ export const Sidebar = () => {
     return (
         <div className="w-60 h-screen border border-r border-1 border-gray-200">
             <img src="/logo.svg" alt="logo" className="w-50 p-3 pt-5" />
-            <SearchBar query={""} />
+            {/* <SearchBar query={""} /> */}
             {
                 sectionGroups.map((sectionGroup, index) => {
                     return (
