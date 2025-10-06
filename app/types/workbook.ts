@@ -1,14 +1,12 @@
-import { User } from "./user";
-
-type Workbook = {
-    name: string;
-    _id: string;
-    createdBy: User;
-    _creationTime: string;
-}
+export type Workbook = {
+  name: string;
+  _id: string;
+  createdBy: string;
+  _creationTime: number;
+};
 
 export type WorkbookTableRow = {
-    contactName: string;
-    companyUrl: string;
-    workEmail: string;
+  contactName: string;
+  companyUrl: string;
+  workEmail: string;
 };

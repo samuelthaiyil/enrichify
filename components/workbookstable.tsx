@@ -1,6 +1,5 @@
 "use client";
 
-import { query } from "@/convex/_generated/server";
 import {
   Table,
   TableCaption,
@@ -10,7 +9,6 @@ import {
   TableBody,
   TableCell,
 } from "./ui/table";
-import { v } from "convex/values";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { BootstrapIcon } from "./ui/bootstrap-icon";
@@ -18,6 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { User } from "@/app/types/user";
 import { useRouter } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
+import { toast } from "sonner";
 
 export const WorkbooksTable = () => {
   const router = useRouter();
@@ -35,11 +34,14 @@ export const WorkbooksTable = () => {
   };
 
   const handleAddFavouriteWorkbook = async (userId: Id<"Users">, workbookId: Id<"Workbooks">) => {
-    console.log("fired")
-    await addFavouriteWorkbook({
-      userId,
-      workbookId
-    });
+    try {
+      await addFavouriteWorkbook({
+        userId,
+        workbookId
+      });
+    } catch (error) {
+      toast.error("Error adding to favourites");
+    }
   }
 
   return (
